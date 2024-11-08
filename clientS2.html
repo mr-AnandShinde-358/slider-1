@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Slider with Hover Pause</title>
+    <style>
+      .container {
+        width: 1200px; /* Ensure it fits within Blogger's content area */
+        padding: 0;
+        margin: 0 auto; /* Center container */
+        overflow: hidden; /* Avoid overflow issues */
+        box-sizing: border-box; /* Standardize box-sizing */
+        display: flex;
+        justify-content: center;
+        height: 400px;
+      }
+      .slider-container {
+        max-width: 800px;
+        margin: auto;
+        position: relative;
+        overflow: hidden;
+        height: 400px;
+      }
+
+      .slides {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+      }
+
+      .slide {
+        min-width: 100%;
+        box-sizing: border-box;
+      }
+
+      .slide img {
+        width: 800px;
+        display: block;
+        object-fit: cover;
+        height: 400px;
+      }
+
+      .nav-arrows {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        
+        top: 70%;  
+      }
+
+      .arrow {
+        cursor: pointer;
+        font-size: 15px;
+        color: white;
+        background: rgba(14, 215, 230, 0.5);
+        padding: 15px;
+
+      }
+
+      .navigation-lines {
+        display: flex;
+        justify-content: center;
+        /* margin-top: -1%; */
+        position: absolute;
+        top: 80%;
+        left: 30px;
+      }
+
+      .line {
+        height: 5px;
+        width: 4rem;
+        background-color: #bbb;
+        margin: 0 5px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .line .progress-bar {
+        position: absolute;
+        height: 100%;
+        width: 0;
+        background-color: #333;
+        animation: progressAnimation 5s linear forwards;
+        display: none;
+      }
+
+      .line.active .progress-bar {
+        display: block;
+        animation: progressAnimation 5s linear forwards;
+      }
+
+      @keyframes progressAnimation {
+        0% {
+          width: 0;
+        }
+        100% {
+          width: 100%;
+        }
+      }
+
+      /* Hide arrows in mobile view */
+      @media (max-width: 768px) {
+        .nav-arrows {
+          display: none;
+        }
+      }
+
+      /* Mobile View */
+      @media (max-width: 768px) {
+        .line {
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+          border-radius: 50%;
+          position: none;
+          overflow: none;
+        }
+
+        .navigation-lines {
+          left: 25%;
+        }
+
+        .slide img {
+        height: 250px;
+      }
+
+      }
+
+      /* Extra Mobile View */
+      @media (max-width: 480px) {
+        .line {
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+          border-radius: 50%;
+          position: none;
+          overflow: none;
+        }
+        .navigation-lines {
+          left: 25%;
+        }
+
+        .slide img {
+        height: 250px;
+      }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="slider-container" id="slider-container">
+        <div class="slides" id="slides">
+          <div class="slide">
+            <img
+              src="https://images.pexels.com/photos/6469/red-hands-woman-creative.jpg"
+              alt="Slide 1"
+            />
+          </div>
+          <div class="slide">
+            <img
+              src="https://images.pexels.com/photos/733856/pexels-photo-733856.jpeg"
+              alt="Slide 2"
+            />
+          </div>
+          <div class="slide">
+            <img
+              src="https://via.placeholder.com/800x400/3357FF"
+              alt="Slide 3"
+            />
+          </div>
+          <div class="slide">
+            <img
+              src="https://via.placeholder.com/800x400/3357FF"
+              alt="Slide 3"
+            />
+          </div>
+          <div class="slide">
+            <img
+              src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhilrVFBmeY8aaT3sVreX6vkFwcecGqgRFdH2a4ttsFlf391IYvZkd4SwWhab2k8W-oLWJQK1_P6rue2vvxltn1KbFhOkVb0Q1v1w1x03RReXmDKwy0nt_st7W1G_59In1sHjZMbPZe_SZXTW8B4fNvAEF5FX6uBWC1-Q_2JCxSzh2VsPGfEnemrUe6hTVO/w640-h640/Banashankari-Temple.webp"
+              alt="Slide 4"
+            />
+          </div>
+          <div class="slide">
+            <img
+              src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhilrVFBmeY8aaT3sVreX6vkFwcecGqgRFdH2a4ttsFlf391IYvZkd4SwWhab2k8W-oLWJQK1_P6rue2vvxltn1KbFhOkVb0Q1v1w1x03RReXmDKwy0nt_st7W1G_59In1sHjZMbPZe_SZXTW8B4fNvAEF5FX6uBWC1-Q_2JCxSzh2VsPGfEnemrUe6hTVO/w640-h640/Banashankari-Temple.webp"
+              alt="Slide 4"
+            />
+          </div>
+          <div class="slide">
+            <img
+              src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhilrVFBmeY8aaT3sVreX6vkFwcecGqgRFdH2a4ttsFlf391IYvZkd4SwWhab2k8W-oLWJQK1_P6rue2vvxltn1KbFhOkVb0Q1v1w1x03RReXmDKwy0nt_st7W1G_59In1sHjZMbPZe_SZXTW8B4fNvAEF5FX6uBWC1-Q_2JCxSzh2VsPGfEnemrUe6hTVO/w640-h640/Banashankari-Temple.webp"
+              alt="Slide 4"
+            />
+          </div>
+          <div class="slide">
+            <img
+              src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhilrVFBmeY8aaT3sVreX6vkFwcecGqgRFdH2a4ttsFlf391IYvZkd4SwWhab2k8W-oLWJQK1_P6rue2vvxltn1KbFhOkVb0Q1v1w1x03RReXmDKwy0nt_st7W1G_59In1sHjZMbPZe_SZXTW8B4fNvAEF5FX6uBWC1-Q_2JCxSzh2VsPGfEnemrUe6hTVO/w640-h640/Banashankari-Temple.webp"
+              alt="Slide 4"
+            />
+          </div>
+          <div class="slide">
+            <img
+              src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhilrVFBmeY8aaT3sVreX6vkFwcecGqgRFdH2a4ttsFlf391IYvZkd4SwWhab2k8W-oLWJQK1_P6rue2vvxltn1KbFhOkVb0Q1v1w1x03RReXmDKwy0nt_st7W1G_59In1sHjZMbPZe_SZXTW8B4fNvAEF5FX6uBWC1-Q_2JCxSzh2VsPGfEnemrUe6hTVO/w640-h640/Banashankari-Temple.webp"
+              alt="Slide 4"
+            />
+          </div>
+          <div class="slide">
+            <img
+              src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhilrVFBmeY8aaT3sVreX6vkFwcecGqgRFdH2a4ttsFlf391IYvZkd4SwWhab2k8W-oLWJQK1_P6rue2vvxltn1KbFhOkVb0Q1v1w1x03RReXmDKwy0nt_st7W1G_59In1sHjZMbPZe_SZXTW8B4fNvAEF5FX6uBWC1-Q_2JCxSzh2VsPGfEnemrUe6hTVO/w640-h640/Banashankari-Temple.webp"
+              alt="Slide 4"
+            />
+          </div>
+        </div>
+        <div class="nav-arrows">
+          <span class="arrow" onclick="moveSlide(-1)">&#10094;</span>
+          <span class="arrow" onclick="moveSlide(1)">&#10095;</span>
+        </div>
+        <div class="navigation-lines" id="navigation-lines"></div>
+      </div>
+
+    </div>
+
+    <!-- Include the external JavaScript file -->
+    <script src="https://earnest-crumble-afa21e.netlify.app/cust1.js"></script>
+  </body>
+</html>
